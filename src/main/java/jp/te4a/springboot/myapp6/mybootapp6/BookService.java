@@ -1,12 +1,19 @@
+package jp.te4a.springboot.myapp6.mybootapp6;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 @Service
 public class BookService {
  @Autowired
  BookRepository bookRepository;
  public BookBean save(BookBean bookBean) {
-        return bookRepository.save(bookBean);
+        return bookRepository.save(bookBean);//保存メソッド
     }
  public List<BookBean> findAll() {
-        return bookRepository.findAll();
+        return bookRepository.findAll();//取得メソッド
     }
 
 }
