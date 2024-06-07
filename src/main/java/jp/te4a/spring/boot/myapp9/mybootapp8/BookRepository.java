@@ -1,13 +1,29 @@
-package jp.te4a.spring.boot.myapp8.mybootapp8;
+package jp.te4a.spring.boot.myapp9.mybootapp8;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Repository;
-@Repository
-public class BookRepository {
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+
+//import java.util.ArrayList;
+
+//import java.util.concurrent.ConcurrentHashMap;
+//import java.util.concurrent.ConcurrentMap;
+//import org.springframework.beans.BeanUtils;
+//import org.springframework.data.jpa.repository.JpaRepository;
+//import org.springframework.stereotype.Repository;
+
+public interface BookRepository extends JpaRepository<BookBean, Integer>{
+     @Query("SELECT X FROM BookBean X ORDER BY X.title")
+ List<BookBean> findAllOrderByTitle();
+
+    
+}
+
+//@Repository
+/*public class BookRepository {
+    
     private final ConcurrentMap<Integer, BookBean> bookMap = new 
 ConcurrentHashMap<>();
     private int BOOK_ID = 1;
@@ -32,4 +48,4 @@ public List<BookBean> findAll() {
 public BookBean findOne(Integer id) {
     return bookMap.get(id);//全件
 }
-}
+}*/
