@@ -10,38 +10,40 @@ public class BookService {
     @Autowired
     BookRepository bookRepository;
     public BookForm create(BookForm bookForm) {
-        //データはBookFormで扱い、Repositoryを使う時は
-        //BookBeanに入れて渡す
-        //
         bookForm.setId(bookRepository.getBookId());
         BookBean bookBean = new BookBean();
         BeanUtils.copyProperties(bookForm, bookBean);
         bookRepository.create(bookBean);
         return bookForm;
-    }
+        //【追加処理】データはBookFormで扱い、
+        //Repositoryを使う時は
+        //BookBeanに入れて渡す
 
-        public BookForm update(BookForm bookForm) {//更新
-            BookBean bookBean = new BookBean();
-            BeanUtils.copyProperties(bookForm, bookBean);
-            bookRepository.update(bookBean);
-            return bookForm;
         }
-public void delete(Integer id) { bookRepository.delete(id); }//削除
-
+    public BookForm update(BookForm bookForm) {
+        BookBean bookBean = new BookBean();
+        BeanUtils.copyProperties(bookForm, bookBean);
+        bookRepository.update(bookBean);
+        return bookForm;//更新処理
+    }
+    public void delete(Integer id) { bookRepository.delete(id); }
+    //削除処理
     public List<BookForm> findAll() {
-        List<BookBean> beanList = bookRepository.findAll();//取得処理全て
+        List<BookBean> beanList = bookRepository.findAll();
         List<BookForm> formList = new ArrayList<BookForm>();
         for(BookBean bookBean: beanList) {
         BookForm bookForm = new BookForm();
         BeanUtils.copyProperties(bookBean, bookForm);
         formList.add(bookForm);
     }
-    return formList;
+    return formList;//【取得処理】（全件）
+    }
+    public BookForm findOne(Integer id) {
+        BookBean bookBean = bookRepository.findOne(id);
+        BookForm bookForm = new BookForm();
+        BeanUtils.copyProperties(bookBean, bookForm);
+        return bookForm;//【取得処理】（１件）
+        
+    }
 }
-        public BookForm findOne(Integer id) {
-            BookBean bookBean = bookRepository.findOne(id);
-            BookForm bookForm = new BookForm(); //1件
-            BeanUtils.copyProperties(bookBean, bookForm);
-            return bookForm;
-        }
-}
+

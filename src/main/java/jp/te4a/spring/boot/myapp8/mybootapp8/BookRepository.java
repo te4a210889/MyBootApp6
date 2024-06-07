@@ -10,26 +10,26 @@ import org.springframework.stereotype.Repository;
 public class BookRepository {
     private final ConcurrentMap<Integer, BookBean> bookMap = new 
 ConcurrentHashMap<>();
-private int BOOK_ID = 1;
-public int getBookId() {
-    //IDを発行する仕組み
-         return BOOK_ID++;
-    }
-    public BookBean create(BookBean bookBean) {
-            return bookMap.put(bookBean.getId(), bookBean);//作成
-        }
-        public BookBean update(BookBean updateBookBean) {
-            BookBean bookBean = bookMap.get(updateBookBean.getId());
-            BeanUtils.copyProperties(updateBookBean, bookBean);
-            return bookBean;//更新
-        }
-        public void delete(Integer bookId) {
-            bookMap.remove(bookId);//削除
-        }
-        public List<BookBean> findAll() {
-            return new ArrayList<>(bookMap.values());//1件取得
-        }
-        public BookBean findOne(Integer id) {
-            return bookMap.get(id);//全件取得
-        }
+    private int BOOK_ID = 1;
+    public int getBookId() {//Dを発行する仕組み
+    return BOOK_ID++;
+}
+
+public BookBean create(BookBean bookBean) {
+    return bookMap.put(bookBean.getId(), bookBean);//作成
+}
+public BookBean update(BookBean updateBookBean) {
+    BookBean bookBean = bookMap.get(updateBookBean.getId());//更新
+    BeanUtils.copyProperties(updateBookBean, bookBean);
+    return bookBean;
+ }
+public void delete(Integer bookId) {//削除
+    bookMap.remove(bookId);
+}
+public List<BookBean> findAll() {
+    return new ArrayList<>(bookMap.values());//取得1件
+}
+public BookBean findOne(Integer id) {
+    return bookMap.get(id);//全件
+}
 }

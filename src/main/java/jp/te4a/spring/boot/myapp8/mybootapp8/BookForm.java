@@ -12,3 +12,4 @@ public class BookForm {
     private String publisher;
     private Integer price;
 }
+
