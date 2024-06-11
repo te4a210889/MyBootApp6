@@ -1,4 +1,4 @@
-package jp.te4a.spring.boot.myapp9.mybootapp8;
+package jp.te4a.spring.boot.myapp9.mybootapp9;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  @PostMapping(path = "edit", params = "form")
  String editForm(@RequestParam Integer id, BookForm form) {
     ///books/ceditにパラメタformを含むPOST要求
-    BookForm bookForm = bookService.findByid(id);
+    BookForm bookForm = bookService.findOne(id);
     BeanUtils.copyProperties(bookForm, form);
     return "books/edit";
  }

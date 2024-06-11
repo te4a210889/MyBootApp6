@@ -1,4 +1,4 @@
-package jp.te4a.spring.boot.myapp9.mybootapp8;
+package jp.te4a.spring.boot.myapp9.mybootapp9;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 public class BookService {
     @Autowired
     BookRepository bookRepository;
+
     public BookForm create(BookForm bookForm) {
         //bookForm.setId(bookRepository.getBookId());
         BookBean bookBean = new BookBean();
@@ -21,12 +22,12 @@ public class BookService {
         //Repositoryを使う時は
         //BookBeanに入れて渡す
         }
-        public BookForm save(BookForm bookForm) {
+        /*public BookForm save(BookForm bookForm) {
             BookBean bookBean = new BookBean();
             BeanUtils.copyProperties(bookForm, bookBean);
             bookRepository.save(bookBean);
             return bookForm;
-        }
+        }*/
         public BookForm update(BookForm bookForm) {
             BookBean bookBean = new BookBean();
             BeanUtils.copyProperties(bookForm, bookBean);
@@ -47,20 +48,44 @@ public class BookService {
     }
     return formList;//【取得処理】（全件）
     }
-    public BookForm findByid(Integer id) {
+
+    public BookForm findOne(Integer id) {
+        Optional<BookBean> optionalBook = bookRepository.findById(id);
+        if (optionalBook.isPresent()) {
+            BookBean book = optionalBook.get();
+            // BookBeanからBookFormへの変換処理
+            BookForm bookForm = new BookForm();
+            bookForm.setId(book.getId());
+            bookForm.setTitle(book.getTitle());
+           // bookForm.setAuthor(book.getAuthor());
+            return bookForm;
+        } else {
+            return null;
+        }
+    //public Optional<BookBean> findOne(Integer id) {
+   /*  public BookForm findOne(Integer id) {
         
         Optional<BookBean> opt = bookRepository.findById(id);
+        BookBean book = opt.get();
         BookForm bookForm = new BookForm();
         opt.ifPresent(book -> {
 
 
             // bookを使った処理
-            //BookForm.setId();
+            bookForm.setId(book.getId());
+            bookForm.setPrice(book.getPrice());
+            bookForm.setPublisher(book.getPublisher());
+            bookForm.setTitle(book.getTitle());
+            bookForm.setWritter(book.getWritter());
+            
+
            });
     
         //BeanUtils.copyProperties(bookBean, bookForm);
         return bookForm;//【取得処理】（１件）
+        //return bookRepository.findById(id);
         
+    }*/
     }
 }
 
