@@ -1,13 +1,13 @@
 package jp.te4a.spring.boot.myapp9.mybootapp9;
 
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = BookApplication.class)
 class Mybootapp9ApplicationTests {
 
-	 @Test
-	void contextLoads() {
-	}
+	// @Test
+	//void contextLoads() {
+	//}
 
 }

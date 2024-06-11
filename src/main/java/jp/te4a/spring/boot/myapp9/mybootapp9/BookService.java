@@ -57,6 +57,9 @@ public class BookService {
             BookForm bookForm = new BookForm();
             bookForm.setId(book.getId());
             bookForm.setTitle(book.getTitle());
+            bookForm.setWritter(book.getWritter());
+            bookForm.setPublisher(book.getPublisher());
+            bookForm.setPrice(book.getPrice());
            // bookForm.setAuthor(book.getAuthor());
             return bookForm;
         } else {
